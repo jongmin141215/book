@@ -12,6 +12,13 @@ feature 'Viewing links' do
     within 'ul#links' do
       expect(page).to have_content('Makers Academy')
     end
+
+  end
+
+  scenario 'I can press button create link' do
+    visit '/links'
+    click_button('Create link')
+    expect(current_path).to eq '/links/new'
   end
 
 end
