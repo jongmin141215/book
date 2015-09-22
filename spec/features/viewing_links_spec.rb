@@ -1,4 +1,4 @@
-require './data_mapper_setup.rb'
+require_relative '../../app/data_mapper_setup'
 
 feature 'Viewing links' do
 

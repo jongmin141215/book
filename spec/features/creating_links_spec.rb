@@ -1,4 +1,4 @@
-require './data_mapper_setup.rb'
+require_relative '../../app/data_mapper_setup'
 
 feature 'Creating links' do
 
@@ -14,7 +14,10 @@ feature 'Creating links' do
     within 'ul#links' do
       expect(page).to have_content("This is Zombocom")
     end
+  end
 
+  scenario 'there are no links in the database at the start of the test' do
+    expect(Link.count).to eq 0
   end
 
 
