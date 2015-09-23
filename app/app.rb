@@ -7,7 +7,7 @@ class BookmarkManager < Sinatra::Base
   set :session_secret, 'super secret'
 
   get '/' do
-    erb :index
+    redirect to('/links')
   end
 
   get '/links' do
@@ -45,9 +45,16 @@ class BookmarkManager < Sinatra::Base
 
   post '/users' do
     user = User.create(email: params[:email],
-                       password: params[:password])
-    session[:user_id] = user.id
-    redirect to('/links')
+                       password: params[:password],
+                       password_confirmation: params[:password_confirmation])
+    if user.save
+      session[:user_id] = user.id
+      redirect to('/links')
+    else
+      "Password and confirmation password did not match"
+      erb :'users/new'
+    end
+
   end
 
   helpers do
