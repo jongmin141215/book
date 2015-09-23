@@ -3,6 +3,8 @@ require './app/models/link'
 require './app/models/tag'
 require './app/models/user'
 require 'dm-validations'
+require 'sinatra/base'
+require 'sinatra/flash'
 
 env = ENV['RACK_ENV'] || 'development'
 
