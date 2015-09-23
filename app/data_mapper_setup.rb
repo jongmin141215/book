@@ -1,6 +1,7 @@
 require 'data_mapper'
 
 env = ENV['RACK_ENV'] || 'development'
+
 if ENV['RACK_ENV'] == "production"
   DataMapper.setup(:default, ENV['DATABASE_URL'])
 else
