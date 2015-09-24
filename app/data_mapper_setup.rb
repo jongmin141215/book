@@ -5,6 +5,7 @@ require './app/models/user'
 require 'dm-validations'
 require 'sinatra/base'
 require 'sinatra/flash'
+require_relative '../spec/factories/user'
 
 env = ENV['RACK_ENV'] || 'development'
 

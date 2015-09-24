@@ -15,6 +15,7 @@ group :test do
   gem 'rspec-sinatra'
   gem 'database_cleaner'
   gem 'rack'
+  gem 'factory_girl'
 end
 
 # gem "rails"
