@@ -7,6 +7,7 @@ require 'sinatra/base'
 require 'sinatra/flash'
 require_relative '../spec/factories/user'
 
+
 env = ENV['RACK_ENV'] || 'development'
 
 if ENV['RACK_ENV'] == "production"
