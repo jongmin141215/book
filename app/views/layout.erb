@@ -8,11 +8,6 @@
     <% if current_user %>
       Welcome, <%= current_user.email %>
     <% end %>
-    <% if flash[:notice] %>
-      <div id='notice'><%= flash[:notice] %></div>
-    <% end %>
-
-
 
     <% if flash[:errors] && !flash[:errors].empty? %>
       Please refer to these errors:
@@ -22,9 +17,6 @@
         <% end %>
       </ul>
     <% end %>
-
-
-
     <%= yield %>
   </body>
 </html>
