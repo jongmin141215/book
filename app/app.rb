@@ -87,6 +87,21 @@ require_relative 'helpers'
       erb :'sessions/goodbye'
     end
 
+    get '/password_reset' do
+      erb :'users/password_reset'
+    end
+
+    post '/password_reset' do
+      user = User.first(email: params[:email])
+      if user
+        user.password_token = generate_password_token
+        user.save
+        flash.now[:notice] = 'Check your emails'
+      else
+        flash.now[:errors] = ['The email is incorrect']
+        redirect to '/password_reset'
+      end
+    end
 
   run! if app_file == BookmarkManager
 end
