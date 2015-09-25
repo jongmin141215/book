@@ -1,21 +1,49 @@
 require_relative './data_mapper_setup'
 require 'sinatra/partial'
 require_relative 'helpers'
-require './app/controllers/link_controller'
-require './app/controllers/base_controller'
 
-include TheApp::Models
-module TheApp
   class BookmarkManager < Sinatra::Base
     include AppHelpers
     register Sinatra::Flash
     register Sinatra::Partial
+    use Rack::MethodOverride
+    set :partial_template_engine, :erb
+    set :views, proc {File.join(root,'..','/app/views')}
+    enable :sessions
+    set :session_secret, 'super secret'
 
     get '/' do
       redirect to('/links')
     end
 
-    use Routes::LinkController
+    get '/links' do
+      @links = Link.all
+      erb :'links/index'
+    end
+
+    get '/links/new' do
+      erb :'links/new'
+    end
+
+    post '/links' do
+      link = Link.new(url:   params[:url],
+                      title: params[:title],
+                      tag:   params[:tags])
+      params[:tags] == "" ? params[:tags] = "no tags" : params[:tags]
+      tags_array = params[:tags].split(" ")
+      tags_array.each do |word|
+        tag = Tag.create(name: word)
+        link.tags << tag
+        link.save
+      end
+      redirect to('/links')
+    end
+
+    get '/tags/:name' do
+      tag = Tag.first(name: params[:name])
+      @links = tag ? tag.links : []
+      erb :'links/index'
+    end
 
     get '/users/new' do
       @user = User.new
@@ -61,5 +89,4 @@ module TheApp
 
 
   run! if app_file == BookmarkManager
-  end
 end
