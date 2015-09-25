@@ -7,7 +7,6 @@ require 'sinatra/base'
 require 'sinatra/flash'
 require_relative '../spec/factories/user'
 
-
 env = ENV['RACK_ENV'] || 'development'
 
 if ENV['RACK_ENV'] == "production"
@@ -15,7 +14,6 @@ if ENV['RACK_ENV'] == "production"
 else
   DataMapper.setup(:default, "postgres://localhost/bookmark_manager_#{env}")
 end
-
 
 DataMapper.finalize
 

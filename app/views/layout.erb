@@ -5,6 +5,7 @@
   </head>
 
   <body>
+    <%= erb :test_partial %>
     <% if current_user %>
       Welcome, <%= current_user.email %>
       <form action = '/sessions' method='post'>

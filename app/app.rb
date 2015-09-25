@@ -1,7 +1,11 @@
 require_relative './data_mapper_setup'
+# require 'sinatra/partial'
 
 class BookmarkManager < Sinatra::Base
   use Rack::MethodOverride
+  # register Sinatra::Partial
+  # set :partial_template_engine, :erb
+  # enable :partial_underscores
   set :views, proc {File.join(root,'..','/app/views')}
   enable :sessions
   register Sinatra::Flash

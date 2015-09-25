@@ -8,6 +8,7 @@ feature 'User sign up' do
     user.email = 'bob@example.com'
     expect { sign_up_as(user) }.to change(User, :count).by(1)
     expect(page).to have_content("Welcome, bob@example.com")
+    expect(page).to have_content("This is a test partial")
   end
 
   scenario 'requires a matching confirmation password' do
